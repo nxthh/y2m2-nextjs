@@ -3,9 +3,12 @@
 import { useEffect, useState } from "react";
 import { ProductCardComponent } from "./ProductCardComponent";
 import Link from "next/link";
-import { Key } from "lucide-react";
 
-export default function ProductCardListComponent() {
+export default function ProductCardListComponent({
+  className = "container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-8 gap-8 mx-auto",
+}: {
+  className?: string
+}) {
   // create state
   const [products, setProducts] = useState([]);
 
@@ -26,7 +29,7 @@ export default function ProductCardListComponent() {
   // 3. array list dependencies : [id], [uuid]
 
   return (
-    <section className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-8 gap-8 mx-auto">
+    <section className={className}>
       {products?.map(({ id, images, title, description, price, category }) => (
         <Link href={`/products/${id}?category=${category}`} key={title}>
           <ProductCardComponent
